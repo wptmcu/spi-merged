@@ -30,7 +30,7 @@ void UART_init(void);
 * Function will block until a character can be accepted.
 * After checking the DREIF setting, send character data
 */
-void UART_sendChar(char c);
+void UART_sendChar(unsigned char c);
 
 /*
 * Assign array based on string length and send UART data to PC

@@ -10,8 +10,7 @@
 #define SPI_H_
 
 void SPI_init(void);
-uint8_t SPI0_GetRxData();
-
-
+uint8_t SPI0_SendTxData(uint8_t data);
+void readADC(void);
 
 #endif /* SPI_H_ */

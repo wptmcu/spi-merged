@@ -30,7 +30,7 @@ void UART_init(void)
 	USART4.CTRLC |= USART_CHSIZE1_bm | USART_CHSIZE0_bm;
 }
 
-void UART_sendChar(char c)
+void UART_sendChar(unsigned char c)
 {
 	while (!(USART4.STATUS & USART_DREIF_bm))
 	{

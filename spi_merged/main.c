@@ -20,15 +20,26 @@
 
 int main(void)
 {
-	PORTB.DIR |= 0x01;
-	PORTB.OUT |= 0x01;
+	
+	//Rx Mode
+	PORTA.DIR |= PIN2_bm | PIN3_bm;
+	PORTC.DIR |= PIN7_bm;
+	PORTD.DIR |= PIN4_bm;
+	
+	PORTA.OUTCLR |= PIN2_bm;
+	PORTA.OUTSET |= PIN3_bm;
+	PORTC.OUTCLR |= PIN7_bm;
+	PORTD.OUTCLR |= PIN4_bm;
+	
 	SPI_init();
 	UART_init();
 	UART_sendString("serial\r\n");
 	sei();
 	while (1)
 	{
-	}
+		//_delay_ms(100);
+		readADC();
+	}	
 }
 
 ISR(USART4_RXC_vect)
@@ -49,14 +60,4 @@ ISR(USART4_RXC_vect)
 			uart_com_routine(read_com, read_val);
 		}
 	}
-}
-
-
-ISR(SPI0_INT_vect)
-{
-	UART_sendChar("qwer");
-	uint8_t received_byte = SPI0_GetRxData();
-	SPI0.INTFLAGS = SPI_RXCIF_bm;
-	UART_sendChar(received_byte);
-	received_byte = 0;
 }
